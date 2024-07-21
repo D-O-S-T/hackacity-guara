@@ -302,9 +302,12 @@ section.module.parallax h1{
     background-color: #19720B;
     position: fixed;
     top: 0;
-    width: 100%;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .navbar ul {
@@ -323,30 +326,28 @@ section.module.parallax h1{
 }
 
 .navbar li a {
-    color: white;
-    text-decoration: none;
-    padding: 14px 20px;
-    transition: background-color 0.3s, color 0.3s;
-    border-radius: 5px;
+      display: block;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: background-color 0.3s;
 }
 
 .navbar li i {
-    font-size: 24px;
-    color: #000E5A;
-    margin-right: 10px;
-}
-
-.navbar li a:hover {
-    background-color: #000E5A;
-    color: #ffffff;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
 }
 
 .nav-button {
-    background-color: transparent;
+    color: white;
+    background-color: #000E5A;
     border: none;
+    padding: 5px 20px; 
     cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
+    border-radius: 10px;
 }
 
 /* Responsividade */
