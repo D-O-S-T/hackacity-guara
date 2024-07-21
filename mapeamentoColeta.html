@@ -20,9 +20,10 @@
     <label for="filter">Filtrar pontos:</label>
     <select id="filter">
         <option value="all">Todos</option>
-        <option value="eletronicos">Pontos de Eletrônicos</option>
-        <option value="lampadas">Pontos de Lâmpadas</option>
-        <option value="medicamentos">Pontos de Medicamentos</option>
+        <option value="celular">Pontos de Celulares</option>
+        <option value="cOuT">Pontos de Computadores ou Televisores</option>
+        <option value="pilha">Pontos de Pilha</option>
+        <option value="cOuCa">Pontos de Cabos ou Carregadores</option>
     </select>
 
     <div id="map"></div>
@@ -45,24 +46,29 @@
             popupAnchor: [0, -32] // Ponto do popup em relação ao ícone
         });
 
-        var customIconLampadas = L.icon({
+        var customIconComp = L.icon({
             iconUrl: 'imagens - lixo/icone-lampada.png', // Caminho para o arquivo PNG
             iconSize: [32, 32], // Tamanho do ícone (largura, altura)
             iconAnchor: [16, 32], // Ponto do ícone que ficará em cima da posição do marcador (x, y)
             popupAnchor: [0, -32] // Ponto do popup em relação ao ícone
         });
 
-        var customIconMedicamentos = L.icon({
-            iconUrl: 'imagens/icone-medicamento.png', // Caminho para o arquivo PNG
+        var customIconPilha = L.icon({
+            iconUrl: 'imagens - lixo/icone-raiox.png', // Caminho para o arquivo PNG
             iconSize: [32, 32], // Tamanho do ícone (largura, altura)
             iconAnchor: [16, 32], // Ponto do ícone que ficará em cima da posição do marcador (x, y)
             popupAnchor: [0, -32] // Ponto do popup em relação ao ícone
         });
 
-
+        var customIconCabo = L.icon({
+            iconUrl: 'imagens - lixo/icone-vidro.png', // Caminho para o arquivo PNG
+            iconSize: [32, 32], // Tamanho do ícone (largura, altura)
+            iconAnchor: [16, 32], // Ponto do ícone que ficará em cima da posição do marcador (x, y)
+            popupAnchor: [0, -32] // Ponto do popup em relação ao ícone
+        });
 
         // Coordenadas extraídas do arquivo KML
-        var coordinatesEletronicos = [
+        var coordinatesCelulares = [
             { lat: -15.8293768, lng: -48.0205866, name: "PARQUE ECOLÓGICO DE ÁGUAS CLARAS (Águas Claras)" },
             { lat: -15.7169086, lng: -47.8833988, name: "Administração do Lago Norte (Lago Norte)" },
             { lat: -15.7938014, lng: -47.9154244, name: "Administração do Sudoeste (Cruzeiro/Sudoeste)" },
@@ -83,7 +89,10 @@
             { lat: -16.018639, lng: -48.065785, name: "Casas Bahia (Gama)" },
             { lat: -16.0059499, lng: -48.0002909, name: "Casas Bahia (Santa Maria)" },
             { lat: -15.8275104, lng: -47.9741053, name: "Casa da Cultura (Guará)" },
-            { lat: -15.820817, lng: -48.065743, name: "Colégio Projeção (Taguatinga)" },
+            { lat: -15.820817, lng: -48.065743, name: "Colégio Projeção (Taguatinga)" }
+        ];
+
+        var coordinatesCompTele = [
             { lat: -15.8400857, lng: -48.0283242, name: "Metrô Estação Águas Claras (Águas Claras)" },
             { lat: -15.8223237, lng: -48.1119735, name: "Metrô Estação Ceilândia Centro (Ceilândia)" },
             { lat: -15.8262757, lng: -47.9828693, name: "Metrô Estação Guará (Guará)" },
@@ -103,6 +112,9 @@
             { lat: -15.8666381, lng: -48.037244, name: "Sesc Taguatinga Sul (Taguatinga)" },
             { lat: -15.6416658, lng: -47.7876565, name: "Sesi Sobradinho (Sobradinho)" },
             { lat: -15.812387, lng: -48.0725418, name: "Sesi Taguatinga (Taguatinga)" },
+        ];
+
+        var coordinatesPilhas = [
             { lat: -15.8261723, lng: -47.923715, name: "Sindicato dos Bancários de Brasília (Asa Sul)" },
             { lat: -15.766992, lng: -47.872295, name: "UnB - ADUnB (Asa Norte)" },
             { lat: -15.8441023, lng: -48.1015666, name: "Faculdade UnB Ceilândia - FCE (Ceilândia)" },
@@ -124,7 +136,7 @@
             { lat: -15.835766, lng: -48.0565073, name: "Alameda Shopping" }
         ];
 
-        const coordinatesLampadas = [
+        const coordinatesCabosCarr = [
             { name: "Leroy Merlin Brasília ( Guará)", lat: -15.8351659, lng: -47.9510144 },
             { name: "Extra (Asa Norte)", lat: -15.7364239, lng: -47.8999999 },
             { name: "Leroy Merlin (Aguas Claras)", lat: -15.8439173, lng: -48.0421434 },
@@ -175,64 +187,40 @@
             { name: "DF Atacadista (Guará)", lat: -15.8019886, lng: -47.9551124 }
         ];
 
-        const coordinatesMedicamentos = [
-            { name: 'Drogasil (Asa Norte)', lat: -15.7771954, lng: -47.8839215 },
-            { name: 'Drogasil (Asa Norte)', lat: -15.7572672, lng: -47.8829811 },
-            { name: 'Drogasil (Asa Norte)', lat: -15.7836649, lng: -47.8847943 },
-            { name: 'Drogasil (Asa Norte)', lat: -15.7779234, lng: -47.8864981 },
-            { name: 'Drogasil (Asa Norte)', lat: -15.768474, lng: -47.8873329 },
-            { name: 'Drogasil (Asa Norte)', lat: -15.7871633, lng: -47.8892312 },
-            { name: 'Drogasil (Asa Norte)', lat: -15.7629814, lng: -47.8896976 },
-            { name: 'Drogasil (Águas Claras)', lat: -15.8354829, lng: -48.0176419 },
-            { name: 'Drogasil (Águas Claras)', lat: -15.8381947, lng: -48.0154503 },
-            { name: 'Farmácia Walmart (Águas Claras)', lat: -15.8321361, lng: -48.0405822 },
-            { name: 'Drogasil (Asa Sul)', lat: -15.8116161, lng: -47.897373 },
-            { name: 'Drogasil (Asa Sul)', lat: -15.8192672, lng: -47.8952687 },
-            { name: 'Drogasil (Asa Sul)', lat: -15.8071565, lng: -47.8978335 },
-            { name: 'Drogasil (Asa Sul)', lat: -15.8279655, lng: -47.9290453 },
-            { name: 'Drogasil (Asa Sul)', lat: -15.8274941, lng: -47.9282078 },
-            { name: 'Drogasil (Asa Sul)', lat: -15.8467025, lng: -47.8952497 },
-            { name: 'Drogasil (Lago Sul)', lat: -15.8356088, lng: -47.8673158 },
-            { name: 'Drogasil (Ceilândia)', lat: -15.8134078, lng: -48.102696 },
-            { name: 'Drogasil (Ceilândia)', lat: -15.8193895, lng: -48.1099381 },
-            { name: 'Centro de Saúde 03 de Ceilândia', lat: -15.8309625, lng: -48.0965664 },
-            { name: 'Centro de Saúde n°5 de Ceilândia', lat: -15.8035131, lng: -48.1118815 },
-            { name: 'Centro de Saúde nº 06 da Ceilândia', lat: -15.8401078, lng: -48.1142798 },
-            { name: 'Centro de Saúde N°10', lat: -15.8245621, lng: -48.113469 },
-            { name: 'Drogasil (Gama)', lat: -16.0206451, lng: -48.0659586 },
-            { name: 'Drogasil (Gama)', lat: -16.0255281, lng: -48.0694311 },
-            { name: 'Drogasil ( Guará - Park Shopping)', lat: -15.8337137, lng: -47.9549521 },
-            { name: 'Drogasil ( Núcleo Bandeirante)', lat: -15.8683407, lng: -47.965068 },
-            { name: 'Drogasil (Planaltina)', lat: -15.619591, lng: -47.655394 }
-        ];
-
-
-
         var markers = {
-            eletronicos: [],
-            lampadas: [],
-            medicamentos: []
+            celular: [],
+            cOuT: [],
+            pilha: [],
+            cOuCa: []
         };
 
         function addMarkers() {
-            coordinatesLampadas.forEach(function (coord) {
-                var marker = L.marker([coord.lat, coord.lng], { icon: customIconLampadas })
-                    .bindPopup(coord.name + '<br>Latitude: ' + coord.lat + '<br>Longitude: ' + coord.lng);
-                marker.addTo(map);
-                markers.lampadas.push(marker);
-            });
-
-            coordinatesEletronicos.forEach(function (coord) {
+            coordinatesCelulares.forEach(function (coord) {
                 var marker = L.marker([coord.lat, coord.lng], { icon: customIcon })
                     .bindPopup(coord.name + '<br>Latitude: ' + coord.lat + '<br>Longitude: ' + coord.lng);
                 marker.addTo(map);
-                markers.eletronicos.push(marker);
+                markers.celular.push(marker);
             });
-            coordinatesMedicamentos.forEach(function (coord) {
-                var marker = L.marker([coord.lat, coord.lng], { icon: customIconMedicamentos })
+
+            coordinatesCompTele.forEach(function (coord) {
+                var marker = L.marker([coord.lat, coord.lng], { icon: customIconComp })
                     .bindPopup(coord.name + '<br>Latitude: ' + coord.lat + '<br>Longitude: ' + coord.lng);
                 marker.addTo(map);
-                markers.medicamentos.push(marker);
+                markers.cOuT.push(marker);
+            });
+
+            coordinatesPilhas.forEach(function (coord) {
+                var marker = L.marker([coord.lat, coord.lng], { icon: customIconPilha })
+                    .bindPopup(coord.name + '<br>Latitude: ' + coord.lat + '<br>Longitude: ' + coord.lng);
+                marker.addTo(map);
+                markers.cOuT.push(marker);
+            });
+
+            coordinatesCabosCarr.forEach(function (coord) {
+                var marker = L.marker([coord.lat, coord.lng], { icon: customIconCabo })
+                    .bindPopup(coord.name + '<br>Latitude: ' + coord.lat + '<br>Longitude: ' + coord.lng);
+                marker.addTo(map);
+                markers.cOuCa.push(marker);
             });
 
 
