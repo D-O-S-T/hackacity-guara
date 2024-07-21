@@ -13,24 +13,6 @@ body {
     cursor: pointer;
 }
 
-/*Estilização dos itens dentro do nav*/
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-
-}
-
-.nav-button {
-    color: white;
-    background-color: #000E5A;
-    border: none;
-    padding: 5px 20px; 
-    cursor: pointer;
-    border-radius: 10px;
-}
-
 /*Estilização do main*/
 h1, h2, h3, h4, h5, h6 {
     font-weight: 900;
@@ -314,3 +296,80 @@ section.module.parallax h1{
         text-align: center;
     }
 }
+
+/* Estilos para a barra de navegação */
+.navbar {
+    background-color: #19720B;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    margin-left: 5%;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+}
+
+.navbar li {
+    display: inline-block;
+}
+
+.navbar li a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+}
+
+.navbar li i {
+    font-size: 24px;
+    color: #000E5A;
+    margin-right: 10px;
+}
+
+.navbar li a:hover {
+    background-color: #000E5A;
+    color: #ffffff;
+}
+
+.nav-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .navbar li {
+        width: 100%;
+        text-align: left;
+        margin: 5px 0;
+    }
+} 
+
+/* Estilos para o conteúdo da página */
+    .content {
+        padding: 60px 20px;
+        margin-top: 50px; /* Espaço para a barra de navegação fixa */
+    }
+
+    .content h1 {
+        margin-top: 0;
+    }
