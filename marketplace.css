@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    width: 10em;
     font-family: sans-serif;
     color: #2b0707;
     word-wrap: break-word;
@@ -12,220 +13,23 @@ body {
 }
 
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Raleway', sans-serif;
-    color: #2b0707;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
+
+
+
+
+
 
 .banner {
-    height: 50vh;
+
+    width: 22em;
+
     display: flex;
     justify-content: center;
     text-align: center;
-    flex-direction: column;
-    padding: 5em;
-    animation: fall 2s ease-out forwards;
-}
-
-@keyframes fall {
-    0% {
-        transform: translateY(-100vh);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.background-image {
-    background: url('imagens-marketplace/background.jpg') no-repeat center center;
-    background-size: cover;
-    padding: 20px 0;
-}
-
-.marketplace {
-    padding: 1em 3em 2em 2em;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.box {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-}
-
-.estabelecimentos {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    border: #000E5A;
-    padding: 3em;
-    width: 30%;
-    height: 250px;
-    border-radius: 5%;
-    background-image: linear-gradient(to bottom, rgba(17, 255, 0, 0.5), rgba(237, 238, 239, 0.5));
-    transition: width 0.3s ease, height 0.3s ease;
-    animation: fall 2s ease-out forwards;
-}
-
-.estabelecimentos img {
-    width: 90%;
-    margin-bottom: 15px;
-}
-
-.estabelecimentos h3 {
-    margin: 10px 0;
-    font-size: 1.2em;
-}
-
-.estabelecimentos p {
-    margin: 10px 0;
-    font-size: 1em;
-    color: #555;
-    text-align: center;
-}
-
-.estabelecimentos button {
-    background-color: #19720B;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    margin-top: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1em;
-    transition: background-color 0.3s;
-}
-
-.estabelecimentos button:hover {
-    background-color: #145a08;
-}
-
-.estabelecimentos:hover {
-    width: 37%;
-}
-
-.leaf {
-    width: 1em;
-}
-
-span {
-    background: linear-gradient(45deg, #061987, #28f73d);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-align: center;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: rgb(240, 254, 241);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-size: 200% 200%;
-    animation: gradient-animation 5s ease infinite;
-}
-
-@keyframes gradient-animation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-button {
-    background-image: linear-gradient(45deg, #061987, #28f73d);
-}
-
-/* Responsividade */
-@media only screen and (max-width: 1200px) {
-    .box {
-        justify-content: center;
-    }
-    .estabelecimentos {
-        width: 45%;
-    }
-}
-
-@media only screen and (max-width: 768px) {
-    .banner {
-        padding: 3em;
-    }
-    .banner h1 {
-        font-size: 1.5em;
-    }
-    .banner h2 {
-        font-size: 1.2em;
-    }
-    .estabelecimentos {
-        width: 100%;
-        margin-bottom: 15px;
-    }
-    .estabelecimentos img {
-        width: 80%;
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    .banner {
-        padding: 2em;
-    }
-    .banner h1 {
-        font-size: 1.2em;
-    }
-    .banner h2 {
-        font-size: 1em;
-    }
-    .estabelecimentos {
-        padding: 1em;
-        width: 100%;
-        height: auto;
-    }
-    .estabelecimentos h3 {
-        font-size: 1em;
-    }
-    .estabelecimentos p {
-        font-size: 0.9em;
-    }
-    .estabelecimentos button {
-        padding: 8px 16px;
-        font-size: 0.9em;
-    }
-}
-
-
-
-
-
-.marketplace {
-
-    padding: 1em 3em 2em 2em;
-}
-
-.banner {
-
-
-    height: 50vh;
-    display: flex;
-    justify-content: center;
-    text-align: center;
     flex-direction: column;
-    padding: 5em;
+    padding-left: 50%;
+    padding-top: 20%;
     /* background-image: url(imagens-marketplace/img-top-cred-reciclagem.png);
   color: white; */
     animation: fall 2s ease-out forwards;
@@ -248,9 +52,11 @@ button {
 }
 
 .box {
+    width: 10em;
     display: flex;
     flex-direction: row;
     gap: 10px;
+    padding-left: 50%;
 
 
 
@@ -258,6 +64,7 @@ button {
 }
 
 .estabelecimentos {
+
     display: flex;
     /* Define que a div é um contêiner flexível */
     justify-content: center;
@@ -267,10 +74,9 @@ button {
     flex-direction: column;
     border: #000E5A;
     /* largura da borda, estilo e cor */
-    padding: 3em;
-    /* espaço interno da div */
-    width: 30%;
-    /* largura da div */
+
+
+    width: 10em;
     height: 250px;
     /* altura da div */
     border-radius: 5%;
@@ -283,14 +89,15 @@ button {
 
 .estabelecimentos img {
     display: flex;
-    width: 90%;
+    width: 30%;
     justify-content: center;
     align-items: center;
+    padding-top: 5em;
 }
 
 .estabelecimentos:hover {
     width: 37%;
-   
+
 
 
 
@@ -303,11 +110,14 @@ button {
 span {
     background: linear-gradient(45deg, #061987, #28f73d);
     -webkit-background-clip: text;
-    background-clip: text; /* Suporte adicional */
-    color: transparent; /* Torna a cor do texto transparente para que o gradiente seja visível */
-    text-align: center; /* Alinha o texto ao centro */
-   
-   
+    background-clip: text;
+    /* Suporte adicional */
+    color: transparent;
+    /* Torna a cor do texto transparente para que o gradiente seja visível */
+    text-align: center;
+    /* Alinha o texto ao centro */
+
+
 }
 
 
@@ -320,13 +130,13 @@ span {
 
 /* Definindo estilos básicos do botão */
 button {
-    padding: 10px 20px;
-    font-size: 16px;
+
+    font-size: 8px;
     color: rgb(240, 254, 241);
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-size: 200% 200%;
+
     /* Define o tamanho do fundo */
     animation: gradient-animation 5s ease infinite;
     /* Aplica a animação */
@@ -365,7 +175,7 @@ button {
     padding: 2rem;
     margin: 2rem auto;
     border-radius: 8px;
-    max-width: 800px;
+    width: 300px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -433,4 +243,49 @@ button {
 
 .formulario button:active {
     background-color: #2d6da3;
+}
+
+
+
+
+@media (max-width: 1000px) {
+
+    .banner {
+        font-size: 10px;
+        text-align: center;
+    }
+
+    .box {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+
+
+    }
+
+    .estabelecimentos {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        width: 150px;
+        gap: 5px;
+        font-size: 7px;
+
+
+    }
+
+    .estabelecimentos img {
+        width: 100px;
+    }
+
+    .banner {
+        font-size: 2vw;
+    }
+    
+
+    
+
+
+    
 }
