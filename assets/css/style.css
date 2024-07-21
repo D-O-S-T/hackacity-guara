@@ -1,53 +1,58 @@
-body{
-    margin:0;
-    padding:0;
+body {
+    margin: 0;
+    padding: 0;
     color: #242424;
     font-family: sans-serif;
     word-wrap: break-word;
     overflow-wrap: break-word;
-  }
-  
-  h1,h2,h3,h4,h5,h6{
+}
+
+h1, h3, h4, h5, h6 {
     font-weight: 900;
     color: #000;
-  }
-  
-  .wrapper{
+}
+
+h2 {
+    font-weight: 900; 
+}
+
+.wrapper {
     width: 100%;
     margin: 0 auto;
-  }
-  
-  main{
+}
+
+main {
     display: block;
     background-color: #FFF;
-  }
-  
-  .container{
+}
+
+.container {
     width: 100%;
     max-width: 760px;
     margin: 0 auto;
     padding: 0 20px;
-  }
-  
-  section.module p{
+}
+
+section.module p {
     margin-bottom: 40px;
-  }
-  
-  section.module:last-child{
+}
+
+section.module:last-child {
     margin-bottom: 0;
-  }
-  
-  section.module h2{
+}
+
+section.module h2 {
     margin-bottom: 40px;
     font-size: 30px;
-  }
-  
-  section.module.content{
-   padding: 40px 0;
-   background: #ece7d5; 
-  }
-  
-  section.module.parallax{
+}
+
+section.module.content {
+    padding: 40px 0;
+    background: #000E5A;
+    color: white;
+}
+
+section.module.parallax {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -62,76 +67,75 @@ body{
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-  }
-  
-  section.module.parallax:after{
+}
+
+section.module.parallax:after {
     content: "";
     height: 100%;
     width: 100%;
     position: absolute;
     z-index: 8;
-    background: -moz-linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,0) 40%, #000 100% );
-    background: -webkit-linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,0) 40%, #000 100% );
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 0, rgba(0,0,0,0) 40%, #000 100% );
-  }
-  
-  
-  section.module.parallax-1{
+    background: -moz-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 40%, #000 100%);
+    background: -webkit-linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 40%, #000 100%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0) 40%, #000 100%);
+}
+
+section.module.parallax-1 {
     background-image: url("../imagens/background.jpg");
 }
 
-      section.module.parallax-2{
-        background-image: url("../imagens/imagem2.jpg");
-      }
-      
-      section.module.parallax-3{
-        background-image: url("../imagens/imagem3.jpg");
-      }
-  
-  section.module.parallax h1{
+section.module.parallax-2 {
+    background-image: url("../imagens/imagem2.jpg");
+}
+
+section.module.parallax-3 {
+    background-image: url("../imagens/imagem3.jpg");
+}
+
+section.module.parallax h1 {
     color: #FFF;
     text-align: center;
     font-size: 78px;
     z-index: 50;
     text-transform: uppercase;
-  }
-  
-  @media all and (max-width: 820px) {
-    section.module h2 {
-      font-size: 32px;
-    }
-    .module h2, p{
-      padding: 0 8px;
-    }
-  
-    .container{
-      margin:0;
-      padding:0;
-    }
-  
-    section.module.parallax h1 {
-      font-size: 36px;
-   }
-  }
+}
 
-  /* Estilos para a barra de navegação */
+@media all and (max-width: 820px) {
+    section.module h2 {
+        font-size: 32px;
+    }
+
+    .module h2, p {
+        padding: 0 8px;
+    }
+
+    .container {
+        margin: 0;
+        padding: 0;
+    }
+
+    section.module.parallax h1 {
+        font-size: 36px;
+    }
+}
+
+/* Estilos para a barra de navegação */
 .navbar {
-    background-color: #19720B;
+    background-color: #536A8A;
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 1000; /* Garante que a navbar fique acima de outros elementos */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
-    justify-content: center;
-
+    justify-content: space-between;
+    padding: 10px 20px;
 }
 
 .navbar ul {
     list-style-type: none;
     margin: 0;
-    margin-left: 5%;
     padding: 0;
     display: flex;
     justify-content: space-around;
@@ -144,7 +148,7 @@ body{
 }
 
 .navbar li a {
-    color: white;
+    color: #536A8A;
     text-decoration: none;
     padding: 14px 20px;
     transition: background-color 0.3s, color 0.3s;
@@ -163,25 +167,77 @@ body{
 }
 
 .nav-button {
-  color: white;
-  background-color: #000E5A;
-  border: none;
-  padding: 5px 20px; 
-  cursor: pointer;
-  border-radius: 10px;
+    color: white;
+    background-color: #000E5A;
+    border: none;
+    padding: 5px 20px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+/* Estilo para o botão de toggle */
+.menu-toggle {
+    display: none;
+    background-color: #000E5A;
+    border: none;
+    color: white;
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+    outline: none;
+    position: absolute; /* Faz o botão sobrepor a navbar */
+    right: 20px;
+    top: 10px;
+    z-index: 1100; /* Garante que o botão esteja sobre a navbar e o menu */
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
     .navbar ul {
+        list-style-type: none;
+        margin-bottom: 5px;
+        padding: 5px;
+        display: none;
         flex-direction: column;
-        align-items: flex-start;
-        padding: 10px;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+        position: absolute; /* Faz o menu sobrepor o conteúdo */
+        top: 0px; /* Ajuste conforme necessário */
+        left: 0;
+        background-color: #536A8A; /* Cor de fundo do menu dropdown */
+        z-index: 1000; /* Garante que o menu esteja sobre o conteúdo */
+    }
+
+    .navbar ul.open {
+        display: flex;
     }
 
     .navbar li {
+        display: inline-block;
         width: 100%;
-        text-align: left;
+        text-align: center;
         margin: 5px 0;
     }
-} 
+
+    .navbar li a {
+        color: white;
+        text-decoration: none;
+        padding: 14px 20px;
+        transition: background-color 0.3s, color 0.3s;
+        
+    }
+
+    .navbar li a:hover {
+        background-color: #000;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .logo-princip {
+        max-width: 70%;
+    }
+}
