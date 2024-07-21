@@ -40,28 +40,28 @@
 
 
         var customIcon = L.icon({
-            iconUrl: 'imagens - lixo/icone-eletronicos.png', // Caminho para o arquivo PNG
+            iconUrl: 'imagens - lixo/celular.png', // Caminho para o arquivo PNG
             iconSize: [32, 32], // Tamanho do ícone (largura, altura)
             iconAnchor: [16, 32], // Ponto do ícone que ficará em cima da posição do marcador (x, y)
             popupAnchor: [0, -32] // Ponto do popup em relação ao ícone
         });
 
         var customIconComp = L.icon({
-            iconUrl: 'imagens - lixo/icone-lampada.png', // Caminho para o arquivo PNG
+            iconUrl: 'imagens - lixo/icone-eletronicos.png', // Caminho para o arquivo PNG
             iconSize: [32, 32], // Tamanho do ícone (largura, altura)
             iconAnchor: [16, 32], // Ponto do ícone que ficará em cima da posição do marcador (x, y)
             popupAnchor: [0, -32] // Ponto do popup em relação ao ícone
         });
 
         var customIconPilha = L.icon({
-            iconUrl: 'imagens - lixo/icone-raiox.png', // Caminho para o arquivo PNG
+            iconUrl: 'imagens - lixo/icone-bateria.png', // Caminho para o arquivo PNG
             iconSize: [32, 32], // Tamanho do ícone (largura, altura)
             iconAnchor: [16, 32], // Ponto do ícone que ficará em cima da posição do marcador (x, y)
             popupAnchor: [0, -32] // Ponto do popup em relação ao ícone
         });
 
         var customIconCabo = L.icon({
-            iconUrl: 'imagens - lixo/icone-vidro.png', // Caminho para o arquivo PNG
+            iconUrl: 'imagens - lixo/fiacao.png', // Caminho para o arquivo PNG
             iconSize: [32, 32], // Tamanho do ícone (largura, altura)
             iconAnchor: [16, 32], // Ponto do ícone que ficará em cima da posição do marcador (x, y)
             popupAnchor: [0, -32] // Ponto do popup em relação ao ícone
@@ -211,9 +211,9 @@
 
             coordinatesPilhas.forEach(function (coord) {
                 var marker = L.marker([coord.lat, coord.lng], { icon: customIconPilha })
-                    .bindPopup(coord.name + '<br>Latitude: ' + coord.lat + '<br>Longitude: ' + coord.lng);
+                .bindPopup(coord.name + '<br>Latitude: ' + coord.lat + '<br>Longitude: ' + coord.lng);
                 marker.addTo(map);
-                markers.cOuT.push(marker);
+                markers.pilha.push(marker); // Corrigido para markers.pilha
             });
 
             coordinatesCabosCarr.forEach(function (coord) {
