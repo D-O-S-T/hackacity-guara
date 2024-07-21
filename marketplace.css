@@ -1,0 +1,240 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    color: #2b0707;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-family: "Raleway", sans-serif;
+
+    /* background-image: linear-gradient(to bottom, rgba(17, 255, 0, 0.5), rgba(237, 238, 239, 0.5));  */
+
+}
+
+
+
+
+
+
+.marketplace {
+
+    padding: 1em 3em 2em 2em;
+}
+
+.banner {
+
+
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 5em;
+    /* background-image: url(imagens-marketplace/img-top-cred-reciclagem.png);
+  color: white; */
+    animation: fall 2s ease-out forwards;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100vh);
+        /* Começa fora da tela, acima */
+        opacity: 0;
+        /* Começa invisível */
+    }
+
+    100% {
+        transform: translateY(0);
+        /* Move para a posição final */
+        opacity: 1;
+        /* Fica visível */
+    }
+}
+
+.box {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+
+
+
+}
+
+.estabelecimentos {
+    display: flex;
+    /* Define que a div é um contêiner flexível */
+    justify-content: center;
+    /* Centraliza a imagem horizontalmente */
+    align-items: center;
+    /* Centraliza a imagem verticalmente */
+    flex-direction: column;
+    border: #000E5A;
+    /* largura da borda, estilo e cor */
+    padding: 3em;
+    /* espaço interno da div */
+    width: 30%;
+    /* largura da div */
+    height: 250px;
+    /* altura da div */
+    border-radius: 5%;
+    background-image: linear-gradient(to bottom, rgba(17, 255, 0, 0.5), rgba(237, 238, 239, 0.5));
+    transition: width 0.3s ease, height 0.3s ease;
+    animation: fall 2s ease-out forwards;
+
+
+}
+
+.estabelecimentos img {
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+}
+
+.estabelecimentos:hover {
+    width: 37%;
+   
+
+
+
+}
+
+.marketplace h2 {
+    text-align: center;
+}
+
+span {
+    background: linear-gradient(45deg, #061987, #28f73d);
+    -webkit-background-clip: text;
+    background-clip: text; /* Suporte adicional */
+    color: transparent; /* Torna a cor do texto transparente para que o gradiente seja visível */
+    text-align: center; /* Alinha o texto ao centro */
+   
+   
+}
+
+
+
+
+/* button {
+    background-color: aquamarine;
+    border-radius: 5%;
+} */
+
+/* Definindo estilos básicos do botão */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: rgb(240, 254, 241);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-size: 200% 200%;
+    /* Define o tamanho do fundo */
+    animation: gradient-animation 5s ease infinite;
+    /* Aplica a animação */
+}
+
+/* Definindo a animação de gradiente */
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Exemplo de gradiente linear */
+button {
+    background-image: linear-gradient(45deg, #061987, #28f73d);
+}
+
+
+
+.leaf {
+    width: 1em;
+
+}
+
+/* Estilos gerais do formulário */
+.formulario {
+    background-color: #f9f9f9;
+    padding: 2rem;
+    margin: 2rem auto;
+    border-radius: 8px;
+    max-width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.formulario h2 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.formulario form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.formulario label {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.formulario input[type="text"],
+.formulario input[type="email"],
+.formulario select,
+.formulario textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+}
+
+.formulario input[type="text"]:focus,
+.formulario input[type="email"]:focus,
+.formulario select:focus,
+.formulario textarea:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.2);
+}
+
+.formulario textarea {
+    resize: vertical;
+}
+
+.formulario button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 4px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.formulario button:hover {
+    background-color: #357abd;
+}
+
+.formulario button:active {
+    background-color: #2d6da3;
+}
