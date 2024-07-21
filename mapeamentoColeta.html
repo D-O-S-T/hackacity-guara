@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa com Leaflet e OpenStreetMap</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            width: 100%;
+            height: 480px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Mapa Logística Reversa</h1>
+    <!-- Adiciona o combobox para seleção -->
+    <label for="filter">Filtrar pontos:</label>
+    <select id="filter">
+        <option value="all">Todos</option>
+        <option value="eletronicos">Pontos de Eletrônicos</option>
+        <option value="lampadas">Pontos de Lâmpadas</option>
+        <option value="medicamentos">Pontos de Medicamentos</option>
+    </select>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Inicializa o mapa
+        var map = L.map('map').setView([-15.7937841, -47.8835184], 10); // Defina um ponto central
+
+        // Adiciona o tile layer do OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+
+        var customIcon = L.icon({
+            iconUrl: 'imagens/icone-eletronicos.png', // Caminho para o arquivo PNG
+            iconSize: [32, 32], // Tamanho do ícone (largura, altura)
+            iconAnchor: [16, 32], // Ponto do ícone que ficará em cima da posição do marcador (x, y)
+            popupAnchor: [0, -32] // Ponto do popup em relação ao ícone
+        });
+
+        var customIconLampadas = L.icon({
+            iconUrl: 'imagens/icone-lampada.png', // Caminho para o arquivo PNG
+            iconSize: [32, 32], // Tamanho do ícone (largura, altura)
+            iconAnchor: [16, 32], // Ponto do ícone que ficará em cima da posição do marcador (x, y)
+            popupAnchor: [0, -32] // Ponto do popup em relação ao ícone
+        });
+
+        var customIconMedicamentos = L.icon({
+            iconUrl: 'imagens/icone-medicamento.png', // Caminho para o arquivo PNG
+            iconSize: [32, 32], // Tamanho do ícone (largura, altura)
+            iconAnchor: [16, 32], // Ponto do ícone que ficará em cima da posição do marcador (x, y)
+            popupAnchor: [0, -32] // Ponto do popup em relação ao ícone
+        });
+
+
+
+        // Coordenadas extraídas do arquivo KML
+        var coordinatesEletronicos = [
+            { lat: -15.8293768, lng: -48.0205866, name: "PARQUE ECOLÓGICO DE ÁGUAS CLARAS (Águas Claras)" },
+            { lat: -15.7169086, lng: -47.8833988, name: "Administração do Lago Norte (Lago Norte)" },
+            { lat: -15.7938014, lng: -47.9154244, name: "Administração do Sudoeste (Cruzeiro/Sudoeste)" },
+            { lat: -16.0161625, lng: -48.064593, name: "Administração do Gama (Gama)" },
+            { lat: -15.8466932, lng: -47.9811584, name: "Zero Impacto (Guará)" },
+            { lat: -15.8025351, lng: -47.8650918, name: "Câmara dos Deputados - Anexo IV (Plano Piloto)" },
+            { lat: -15.6474748, lng: -47.7939662, name: "Biblioteca Pública de Sobradinho (Sobradinho)" },
+            { lat: -15.7967176, lng: -47.8671761, name: "Ministério da Ciência, Tecnologia, Inovações e Comunicações" },
+            { lat: -15.7991853, lng: -47.8640538, name: "Senado Federal - Espaço Senado Verde (Plano Piloto)" },
+            { lat: -15.7872957, lng: -47.8789447, name: "SEMA/DF" },
+            { lat: -16.030965, lng: -47.9762354, name: "Zero Impacto (Santa Maria)" },
+            { lat: -15.8232224, lng: -47.9086981, name: "Posto Jarjour (Asa Sul)" },
+            { lat: -15.768676, lng: -47.8817657, name: "Posto Jarjour (Asa Norte)" },
+            { lat: -15.8402559, lng: -48.0505903, name: "Posto Jarjour (Taguatinga Sul)" },
+            { lat: -15.8369541, lng: -48.0198321, name: "Vitrinni Shopping (Águas Claras)" },
+            { lat: -15.8252544, lng: -47.9754112, name: "Administração Regional do Guará (Guará)" },
+            { lat: -15.8999971, lng: -47.7745695, name: "Administração Regional de São Sebastião (São Sebastião)" },
+            { lat: -16.018639, lng: -48.065785, name: "Casas Bahia (Gama)" },
+            { lat: -16.0059499, lng: -48.0002909, name: "Casas Bahia (Santa Maria)" },
+            { lat: -15.8275104, lng: -47.9741053, name: "Casa da Cultura (Guará)" },
+            { lat: -15.820817, lng: -48.065743, name: "Colégio Projeção (Taguatinga)" },
+            { lat: -15.8400857, lng: -48.0283242, name: "Metrô Estação Águas Claras (Águas Claras)" },
+            { lat: -15.8223237, lng: -48.1119735, name: "Metrô Estação Ceilândia Centro (Ceilândia)" },
+            { lat: -15.8262757, lng: -47.9828693, name: "Metrô Estação Guará (Guará)" },
+            { lat: -15.8056042, lng: -48.1212843, name: "Metrô Estação Terminal Ceilândia (Ceilândia)" },
+            { lat: -15.8737905, lng: -48.0851421, name: "Metrô Estação Terminal Samambaia (Samambaia)" },
+            { lat: -15.7991809, lng: -47.8725967, name: "Ministério do Meio Ambiente (Brasília)" },
+            { lat: -16.0159432, lng: -48.0550738, name: "ONG Programando o Futuro (Gama)" },
+            { lat: -15.7937841, lng: -47.8835184, name: "Rodoviária do Plano Piloto (Brasília)" },
+            { lat: -15.8064025, lng: -47.8984505, name: "Sesc Estação 504 Sul (Asa Sul)" },
+            { lat: -15.8204472, lng: -47.9222139, name: "Sesc 913 Sul (Asa Sul)" },
+            { lat: -15.8203057, lng: -48.1223881, name: "Sesc Ceilândia (Ceilândia)" },
+            { lat: -15.8762608, lng: -48.0891246, name: "Sesc Ler Samambaia (Samambaia)" },
+            { lat: -16.0103825, lng: -48.0595092, name: "Sesc Gama (Gama)" },
+            { lat: -15.8178881, lng: -47.98415, name: "Sesc Guará (Guará)" },
+            { lat: -15.805473, lng: -47.9620741, name: "Sesc Sede Administrativa (Guará)" },
+            { lat: -15.8191577, lng: -48.06241, name: "Sesc Taguatinga Norte (Taguatinga)" },
+            { lat: -15.8666381, lng: -48.037244, name: "Sesc Taguatinga Sul (Taguatinga)" },
+            { lat: -15.6416658, lng: -47.7876565, name: "Sesi Sobradinho (Sobradinho)" },
+            { lat: -15.812387, lng: -48.0725418, name: "Sesi Taguatinga (Taguatinga)" },
+            { lat: -15.8261723, lng: -47.923715, name: "Sindicato dos Bancários de Brasília (Asa Sul)" },
+            { lat: -15.766992, lng: -47.872295, name: "UnB - ADUnB (Asa Norte)" },
+            { lat: -15.8441023, lng: -48.1015666, name: "Faculdade UnB Ceilândia - FCE (Ceilândia)" },
+            { lat: -15.6010463, lng: -47.6580004, name: "Universidade de Brasília - Planaltina (Planaltina)" },
+            { lat: -15.8324976, lng: -48.0386535, name: "Unieuro (Águas Claras)" },
+            { lat: -15.6174863, lng: -47.6514018, name: "Administração Regional de Planaltina (Planaltina)" },
+            { lat: -15.8541873, lng: -47.950267, name: "Administração Regional de Candangolândia" },
+            { lat: -15.8841934, lng: -47.8152783, name: "Administração Regional de Jardim Botânico" },
+            { lat: -15.8407645, lng: -47.8696986, name: "Administração Regional do Lago Sul" },
+            { lat: -15.871395, lng: -47.967696, name: "Administração Regional de Núcleo Bandeirante" },
+            { lat: -15.9037752, lng: -48.0682526, name: "Administração Regional do Recanto das Emas" },
+            { lat: -15.8802524, lng: -48.0863031, name: "Administração Regional de Samambaia" },
+            { lat: -15.6497249, lng: -47.7935708, name: "Administração Regional de Sobradinho" },
+            { lat: -15.8326184, lng: -48.0569261, name: "Administração Regional de Taguatinga" },
+            { lat: -15.8147311, lng: -48.0154041, name: "Administração Regional de Vicente Pires" },
+            { lat: -15.8227583, lng: -48.1011057, name: "Administração Regional de Ceilândia" },
+            { lat: -15.8839939, lng: -48.0188322, name: "Administração Regional de Riacho Fundo I" },
+            { lat: -15.7975771, lng: -47.9478749, name: "Administração Regional do Setor de Indústria e Abastecimento" },
+            { lat: -15.835766, lng: -48.0565073, name: "Alameda Shopping" }
+        ];
+
+        const coordinatesLampadas = [
+            { name: "Leroy Merlin Brasília ( Guará)", lat: -15.8351659, lng: -47.9510144 },
+            { name: "Extra (Asa Norte)", lat: -15.7364239, lng: -47.8999999 },
+            { name: "Leroy Merlin (Aguas Claras)", lat: -15.8439173, lng: -48.0421434 },
+            { name: "Extra Hipermercado (Ceilândia)", lat: -15.8207557, lng: -48.1009808 },
+            { name: "Extra (SIA)", lat: -15.7938657, lng: -47.9467833 },
+            { name: "Carrefour Hipermercado (Guará)", lat: -15.8148405, lng: -47.9499118 },
+            { name: "Leroy Merlin Brasília Norte (Asa Norte)", lat: -15.752802, lng: -47.9287154 },
+            { name: "Colunas Home Center (Brazlândia)", lat: -15.6823017, lng: -48.1899146 },
+            { name: "FLK ELETRO RAIO (Vicente Pires)", lat: -15.8033855, lng: -48.0174649 },
+            { name: "Eletropiso (Taguatinga)", lat: -15.8397624, lng: -48.0515029 },
+            { name: "HOMETECK SISTEMAS CONSTRUTIVOS (Guará)", lat: -15.8026214, lng: -47.9550728 },
+            { name: "Cecin Sarkis (Guará)", lat: -15.8035027, lng: -47.9490696 },
+            { name: "Cecin Sarkis (Águas Claras)", lat: -15.8347305, lng: -48.0366535 },
+            { name: "Cecin Sarkis (Asa Sul)", lat: -15.8198758, lng: -47.9077988 },
+            { name: "Só Reparos (Asa Norte)", lat: -15.7736207, lng: -47.8771938 },
+            { name: "Só Reparos (Guará)", lat: -15.8069815, lng: -47.9613518 },
+            { name: "Só Reparos (Asa Sul)", lat: -15.8214801, lng: -47.9183583 },
+            { name: "NB Iluminação (Asa Sul)", lat: -15.8232036, lng: -47.9174319 },
+            { name: "Parafusos & Cia Home (Planaltina)", lat: -15.6201189, lng: -47.6500572 },
+            { name: "ConstruHausen (Planaltina)", lat: -15.60328, lng: -47.681179 },
+            { name: "Atacadão (Asa Norte)", lat: -15.7350605, lng: -47.9048579 },
+            { name: "Assaí Atacadista (Guará)", lat: -15.7932464, lng: -47.9461196 },
+            { name: "Assaí Atacadista (Ceilândia)", lat: -15.8213702, lng: -48.1015907 },
+            { name: "Extra (Taguatinga)", lat: -15.860936, lng: -48.026509 },
+            { name: "Star Luz Elétrica e Iluminação (Asa Sul)", lat: -15.8195782, lng: -47.9079392 },
+            { name: "DOURADO MATERIAIS P/ CONSTRUÇÃO (Arniqueiras)", lat: -15.8658456, lng: -48.0083408 },
+            { name: "JB iluminações Brasília (Jardim Botânico)", lat: -15.8720473, lng: -47.8220352 },
+            { name: "Supermercados Caíque (Samambaia Norte)", lat: -15.864581, lng: -48.0788458 },
+            { name: "Casa Grande Materiais Para Construção (Taguatinga)", lat: -15.848558, lng: -48.0482203 },
+            { name: "Carrefour Bairro (Asa Norte)", lat: -15.7749034, lng: -47.8876246 },
+            { name: "Assaí Atacadista (Águas Claras)", lat: -15.8758392, lng: -48.0244832 },
+            { name: "Atacadão (Taguatinga)", lat: -15.8058546, lng: -48.0684203 },
+            { name: "Carrefour Bairro (Lago Sul)", lat: -15.8358892, lng: -47.8344178 },
+            { name: "Carrefour Bairro (Lago sul)", lat: -15.8426155, lng: -47.8762829 },
+            { name: "Carrefour 24 horas (Asa Sul)", lat: -15.8097979, lng: -47.884524 },
+            { name: "Carrefour (Águas Claras)", lat: -15.8452837, lng: -48.0415202 },
+            { name: "Carrefour (Asa Norte)", lat: -15.7510406, lng: -47.8947464 },
+            { name: "Casa Oliveira (Sobradinho)", lat: -15.6479568, lng: -47.785423 },
+            { name: "Deposito Itajuba (Ceilândia)", lat: -15.814649, lng: -48.119013 },
+            { name: "Extra (Park Sul)", lat: -15.8341578, lng: -47.9505821 },
+            { name: "Ferragens União (Asa Norte)", lat: -15.7542933, lng: -47.8948322 },
+            { name: "Havan Brasília (SIA)", lat: -15.7903455, lng: -47.9460294 },
+            { name: "Home Center Castelo Forte (Samambaia)", lat: -15.8773092, lng: -48.0854837 },
+            { name: "Home Center Castelo Forte (Ceilândia)", lat: -15.8323024, lng: -48.0902869 },
+            { name: "Home Center Castelo Forte (Recanto das Emas)", lat: -15.903749, lng: -48.0690672 },
+            { name: "Home Center Castelo Forte (Vicente Pires)", lat: -15.7912123, lng: -48.0247503 },
+            { name: "Super Frota Supermercado (Gama)", lat: -16.0215014, lng: -48.0677207 },
+            { name: "DF Atacadista (Guará)", lat: -15.8019886, lng: -47.9551124 }
+        ];
+
+        const coordinatesMedicamentos = [
+            { name: 'Drogasil (Asa Norte)', lat: -15.7771954, lng: -47.8839215 },
+            { name: 'Drogasil (Asa Norte)', lat: -15.7572672, lng: -47.8829811 },
+            { name: 'Drogasil (Asa Norte)', lat: -15.7836649, lng: -47.8847943 },
+            { name: 'Drogasil (Asa Norte)', lat: -15.7779234, lng: -47.8864981 },
+            { name: 'Drogasil (Asa Norte)', lat: -15.768474, lng: -47.8873329 },
+            { name: 'Drogasil (Asa Norte)', lat: -15.7871633, lng: -47.8892312 },
+            { name: 'Drogasil (Asa Norte)', lat: -15.7629814, lng: -47.8896976 },
+            { name: 'Drogasil (Águas Claras)', lat: -15.8354829, lng: -48.0176419 },
+            { name: 'Drogasil (Águas Claras)', lat: -15.8381947, lng: -48.0154503 },
+            { name: 'Farmácia Walmart (Águas Claras)', lat: -15.8321361, lng: -48.0405822 },
+            { name: 'Drogasil (Asa Sul)', lat: -15.8116161, lng: -47.897373 },
+            { name: 'Drogasil (Asa Sul)', lat: -15.8192672, lng: -47.8952687 },
+            { name: 'Drogasil (Asa Sul)', lat: -15.8071565, lng: -47.8978335 },
+            { name: 'Drogasil (Asa Sul)', lat: -15.8279655, lng: -47.9290453 },
+            { name: 'Drogasil (Asa Sul)', lat: -15.8274941, lng: -47.9282078 },
+            { name: 'Drogasil (Asa Sul)', lat: -15.8467025, lng: -47.8952497 },
+            { name: 'Drogasil (Lago Sul)', lat: -15.8356088, lng: -47.8673158 },
+            { name: 'Drogasil (Ceilândia)', lat: -15.8134078, lng: -48.102696 },
+            { name: 'Drogasil (Ceilândia)', lat: -15.8193895, lng: -48.1099381 },
+            { name: 'Centro de Saúde 03 de Ceilândia', lat: -15.8309625, lng: -48.0965664 },
+            { name: 'Centro de Saúde n°5 de Ceilândia', lat: -15.8035131, lng: -48.1118815 },
+            { name: 'Centro de Saúde nº 06 da Ceilândia', lat: -15.8401078, lng: -48.1142798 },
+            { name: 'Centro de Saúde N°10', lat: -15.8245621, lng: -48.113469 },
+            { name: 'Drogasil (Gama)', lat: -16.0206451, lng: -48.0659586 },
+            { name: 'Drogasil (Gama)', lat: -16.0255281, lng: -48.0694311 },
+            { name: 'Drogasil ( Guará - Park Shopping)', lat: -15.8337137, lng: -47.9549521 },
+            { name: 'Drogasil ( Núcleo Bandeirante)', lat: -15.8683407, lng: -47.965068 },
+            { name: 'Drogasil (Planaltina)', lat: -15.619591, lng: -47.655394 }
+        ];
+
+
+
+        var markers = {
+            eletronicos: [],
+            lampadas: [],
+            medicamentos: []
+        };
+
+        function addMarkers() {
+            coordinatesLampadas.forEach(function (coord) {
+                var marker = L.marker([coord.lat, coord.lng], { icon: customIconLampadas })
+                    .bindPopup(coord.name + '<br>Latitude: ' + coord.lat + '<br>Longitude: ' + coord.lng);
+                marker.addTo(map);
+                markers.lampadas.push(marker);
+            });
+
+            coordinatesEletronicos.forEach(function (coord) {
+                var marker = L.marker([coord.lat, coord.lng], { icon: customIcon })
+                    .bindPopup(coord.name + '<br>Latitude: ' + coord.lat + '<br>Longitude: ' + coord.lng);
+                marker.addTo(map);
+                markers.eletronicos.push(marker);
+            });
+            coordinatesMedicamentos.forEach(function (coord) {
+                var marker = L.marker([coord.lat, coord.lng], { icon: customIconMedicamentos })
+                    .bindPopup(coord.name + '<br>Latitude: ' + coord.lat + '<br>Longitude: ' + coord.lng);
+                marker.addTo(map);
+                markers.medicamentos.push(marker);
+            });
+
+
+        }
+
+        function filterMarkers(filter) {
+            Object.keys(markers).forEach(function (key) {
+                markers[key].forEach(function (marker) {
+                    if (filter === 'all' || filter === key) {
+                        marker.addTo(map);
+                    } else {
+                        map.removeLayer(marker);
+                    }
+                });
+            });
+        }
+
+
+        addMarkers();
+
+        // Adiciona evento para o combobox
+        document.getElementById('filter').addEventListener('change', function () {
+            var filterValue = this.value;
+            filterMarkers(filterValue);
+        });
+
+        // Inicialmente, mostra todos os pontos
+        filterMarkers('all');
+
+    </script>
+</body>
+
+</html>
