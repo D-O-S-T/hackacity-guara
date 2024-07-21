@@ -24,7 +24,7 @@ nav {
 
 .nav-button {
     color: white;
-    background-color: #DA590A;
+    background-color: #000E5A;
     border: none;
     padding: 5px 20px; 
     cursor: pointer;
@@ -96,7 +96,7 @@ section.module.parallax::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.571);
+    background: rgba(255, 255, 255, 0.448);
     z-index: 1;
 }
 
