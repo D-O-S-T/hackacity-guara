@@ -239,5 +239,11 @@ section.module.parallax h1 {
 
     .logo-princip {
         max-width: 70%;
+        background-color: rgba(255, 255, 255, 0.526);
+        padding: 10px; /* Ajusta o padding para adicionar espaço interno */
+        
+        margin: 0 auto; /* Centraliza o logo horizontalmente */
+        display: block; /* Garante que o logo seja um bloco */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra para destacar o logo */
     }
 }
